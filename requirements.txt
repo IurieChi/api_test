@@ -15,4 +15,3 @@ responses==0.25.6
 urllib3==2.3.0
 
 
-# pytest --html=report.html --self-contained-html
