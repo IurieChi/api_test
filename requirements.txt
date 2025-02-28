@@ -1,0 +1,18 @@
+certifi==2025.1.31
+charset-normalizer==3.4.1
+idna==3.10
+iniconfig==2.0.0
+Jinja2==3.1.5
+MarkupSafe==3.0.2
+packaging==24.2
+pluggy==1.5.0
+pytest==8.3.4
+pytest-html==4.1.1
+pytest-metadata==3.1.1
+PyYAML==6.0.2
+requests==2.32.3
+responses==0.25.6
+urllib3==2.3.0
+
+
+# pytest --html=report.html --self-contained-html
