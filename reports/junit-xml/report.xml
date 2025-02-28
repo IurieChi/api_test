@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="10" skipped="0" tests="18" time="2.099" timestamp="2025-03-01T00:41:46.535420+01:00" hostname="MacBook-Pro.local"><testcase classname="tests.test_search_api" name="test_api_search[search/-?query=developer-200]" time="0.125" /><testcase classname="tests.test_search_api" name="test_api_search[search/-?query=engineer-200]" time="0.126" /><testcase classname="tests.test_search_api" name="test_api_search[search/-?q= -200]" time="0.119"><failure message="assert 503 == 200&#10; +  where 503 = &lt;Response [503]&gt;.status_code">endpoint = 'search/', params = '?q= ', expected_status = 200, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x11139fcb0&gt;
+
+    @pytest.mark.parametrize("endpoint, params, expected_status", endpoint)
+    def test_api_search(endpoint, params, expected_status, caplog):
+        url = base_url + endpoint + params
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_status_code(url, params)
+    
+        # Log test results
+        logger.info(f"Tested {params} -&gt; Expected: {expected_status}, Got: {response}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 503 == 200
+E        +  where 503 = &lt;Response [503]&gt;.status_code
+
+tests/test_search_api.py:31: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_search[search/-?query=20-404]" time="0.109"><failure message="assert 200 == 404&#10; +  where 200 = &lt;Response [200]&gt;.status_code">endpoint = 'search/', params = '?query=20', expected_status = 404, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111f69040&gt;
+
+    @pytest.mark.parametrize("endpoint, params, expected_status", endpoint)
+    def test_api_search(endpoint, params, expected_status, caplog):
+        url = base_url + endpoint + params
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_status_code(url, params)
+    
+        # Log test results
+        logger.info(f"Tested {params} -&gt; Expected: {expected_status}, Got: {response}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 404
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:31: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_search[search/-?r=manager-404]" time="0.104"><failure message="assert 200 == 404&#10; +  where 200 = &lt;Response [200]&gt;.status_code">endpoint = 'search/', params = '?r=manager', expected_status = 404, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111f69970&gt;
+
+    @pytest.mark.parametrize("endpoint, params, expected_status", endpoint)
+    def test_api_search(endpoint, params, expected_status, caplog):
+        url = base_url + endpoint + params
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_status_code(url, params)
+    
+        # Log test results
+        logger.info(f"Tested {params} -&gt; Expected: {expected_status}, Got: {response}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 404
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:31: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_search[search/-?ssl=engineer-404]" time="0.098"><failure message="assert 200 == 404&#10; +  where 200 = &lt;Response [200]&gt;.status_code">endpoint = 'search/', params = '?ssl=engineer', expected_status = 404, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111f6abd0&gt;
+
+    @pytest.mark.parametrize("endpoint, params, expected_status", endpoint)
+    def test_api_search(endpoint, params, expected_status, caplog):
+        url = base_url + endpoint + params
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_status_code(url, params)
+    
+        # Log test results
+        logger.info(f"Tested {params} -&gt; Expected: {expected_status}, Got: {response}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 404
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:31: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_search[searc/-?query=&amp;-404]" time="0.108" /><testcase classname="tests.test_search_api" name="test_mock_codes[search/-?query=backend-500]" time="0.003" /><testcase classname="tests.test_search_api" name="test_mock_codes[search/-?query=frontend-502]" time="0.003" /><testcase classname="tests.test_search_api" name="test_mock_codes[search/-?query=database-503]" time="0.006" /><testcase classname="tests.test_search_api" name="test_mock_codes[search/-?query=bigdata-507]" time="0.002" /><testcase classname="tests.test_search_api" name="test_api_methods[GET-200]" time="0.102" /><testcase classname="tests.test_search_api" name="test_api_methods[POST-405]" time="0.121"><failure message="assert 200 == 405&#10; +  where 200 = &lt;Response [200]&gt;.status_code">method = 'POST', expected_status = 405, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111fa8a40&gt;
+
+    @pytest.mark.parametrize("method, expected_status", req_methods)
+    def test_api_methods(method, expected_status, caplog):
+        """Test API request methods &amp; log results"""
+        url = base_url + search_endpoint
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_api_req_method(url, method)
+    
+        try:
+            result = response.json()
+        except requests.exceptions.JSONDecodeError:
+            result = response.text
+        # Log test results
+        logger.info(f"Tested {method} -&gt; Expected: {expected_status}, Got: {result}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 405
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:65: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_methods[PUT-405]" time="0.132"><failure message="assert 200 == 405&#10; +  where 200 = &lt;Response [200]&gt;.status_code">method = 'PUT', expected_status = 405, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111fa8b30&gt;
+
+    @pytest.mark.parametrize("method, expected_status", req_methods)
+    def test_api_methods(method, expected_status, caplog):
+        """Test API request methods &amp; log results"""
+        url = base_url + search_endpoint
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_api_req_method(url, method)
+    
+        try:
+            result = response.json()
+        except requests.exceptions.JSONDecodeError:
+            result = response.text
+        # Log test results
+        logger.info(f"Tested {method} -&gt; Expected: {expected_status}, Got: {result}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 405
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:65: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_methods[DELETE-405]" time="0.099"><failure message="assert 200 == 405&#10; +  where 200 = &lt;Response [200]&gt;.status_code">method = 'DELETE', expected_status = 405, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111fdd670&gt;
+
+    @pytest.mark.parametrize("method, expected_status", req_methods)
+    def test_api_methods(method, expected_status, caplog):
+        """Test API request methods &amp; log results"""
+        url = base_url + search_endpoint
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_api_req_method(url, method)
+    
+        try:
+            result = response.json()
+        except requests.exceptions.JSONDecodeError:
+            result = response.text
+        # Log test results
+        logger.info(f"Tested {method} -&gt; Expected: {expected_status}, Got: {result}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 405
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:65: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_methods[PATCH-405]" time="0.104"><failure message="assert 200 == 405&#10; +  where 200 = &lt;Response [200]&gt;.status_code">method = 'PATCH', expected_status = 405, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111f2b320&gt;
+
+    @pytest.mark.parametrize("method, expected_status", req_methods)
+    def test_api_methods(method, expected_status, caplog):
+        """Test API request methods &amp; log results"""
+        url = base_url + search_endpoint
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_api_req_method(url, method)
+    
+        try:
+            result = response.json()
+        except requests.exceptions.JSONDecodeError:
+            result = response.text
+        # Log test results
+        logger.info(f"Tested {method} -&gt; Expected: {expected_status}, Got: {result}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 405
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:65: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_methods[OPTIONS-405]" time="0.112"><failure message="assert 200 == 405&#10; +  where 200 = &lt;Response [200]&gt;.status_code">method = 'OPTIONS', expected_status = 405, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111faac30&gt;
+
+    @pytest.mark.parametrize("method, expected_status", req_methods)
+    def test_api_methods(method, expected_status, caplog):
+        """Test API request methods &amp; log results"""
+        url = base_url + search_endpoint
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_api_req_method(url, method)
+    
+        try:
+            result = response.json()
+        except requests.exceptions.JSONDecodeError:
+            result = response.text
+        # Log test results
+        logger.info(f"Tested {method} -&gt; Expected: {expected_status}, Got: {result}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 405
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:65: AssertionError</failure></testcase><testcase classname="tests.test_search_api" name="test_api_methods[HEAD-405]" time="0.115"><failure message="assert 200 == 405&#10; +  where 200 = &lt;Response [200]&gt;.status_code">method = 'HEAD', expected_status = 405, caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x111f69eb0&gt;
+
+    @pytest.mark.parametrize("method, expected_status", req_methods)
+    def test_api_methods(method, expected_status, caplog):
+        """Test API request methods &amp; log results"""
+        url = base_url + search_endpoint
+    
+        with caplog.at_level(logging.INFO):  # Capture logs at INFO level
+            response = instance.check_api_req_method(url, method)
+    
+        try:
+            result = response.json()
+        except requests.exceptions.JSONDecodeError:
+            result = response.text
+        # Log test results
+        logger.info(f"Tested {method} -&gt; Expected: {expected_status}, Got: {result}")
+    
+&gt;       assert response.status_code == expected_status
+E       assert 200 == 405
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+tests/test_search_api.py:65: AssertionError</failure></testcase></testsuite></testsuites>
