@@ -1,6 +1,5 @@
 import requests
 import logging
-# from logger import logger
 
 logger = logging.getLogger(__name__)  # Logger instance
 
@@ -57,3 +56,16 @@ class SearchApi:
         except requests.exceptions.RequestException as e:
             logger.error(f"Request failed: {e}")
             return f"Request Error: {e}"
+
+    def check_api_response_json_schema(self, url, param):
+        """Make API request and check response body if is validate JSON"""
+        try:
+            logger.info(f"Sending {param} request to {url}")  # Log request details
+            response = requests.get(url, timeout=10)
+            logger.info(f"Response: {response.status_code} - {response.text}")
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            return f"HTTP Error: {e}"
+        except requests.exceptions.JSONDecodeError as e:
+            logger.error(f"Request failed: {e}")
+            return f"The response body does not contain valid json {e}"
