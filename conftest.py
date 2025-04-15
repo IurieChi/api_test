@@ -1,6 +1,8 @@
 import logging
 import os
 import pytest
+from jsonschema import validate, ValidationError
+from utils.search_endpoint import SearchApi
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -54,3 +56,11 @@ def pytest_runtest_makereport(item, call):
             logger.error(
                 f"Assertion Error: {call.excinfo.value}"
             )  # Log the assertion error
+
+
+@pytest.fixture()
+def instance_search_API():
+    instance = SearchApi()
+    return instance
+
+
